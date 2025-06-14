@@ -9,7 +9,7 @@ class Printable(ABC):
     def print_me(self, os, prefix="", is_last=False, no_slash=False, is_root=False):
         """Base printing method for the tree structure display.
         Implement properly to display hierarchical structure."""
-        # To be implemented
+        
         pass
         
     @abstractmethod
@@ -41,7 +41,7 @@ class Component(Printable):
     def __init__(self, numeric_val=0):
         self.numeric_val = numeric_val
         
-    # To be implemented
+    
     @abstractmethod
     def print_me(self, os, prefix="", is_last=False):
          branch = '\\-' if is_last else '+-'  
@@ -75,10 +75,10 @@ class Computer(BasicCollection, Component):
         return self
 
     def add_component(self, comp):
-        self.add(comp)  # Добавляем в BasicCollection
+        self.add(comp)  
         return self
     
-    # Другие методы...
+    
     @property
     def components(self):
         return self.items
@@ -88,13 +88,13 @@ class Computer(BasicCollection, Component):
         branch = '\\-' if is_last else '+-'
         os.append(f"{prefix}{branch}Host: {self.name}")
         
-        # Печатаем адреса
+       
         for i, address in enumerate(self.addresses):
-            address.print_me(os, prefix + ("| " if not is_last else "  "), i == len(self.addresses) - 1)
+            address.print_me(os, prefix + ("| " if not is_last else "  "), i == len(self.addresses) - 1) # Печатаем адреса
 
-        # Печатаем компоненты
+       
         for i, component in enumerate(self.items):
-            component.print_me(os, prefix + ("| " if not is_last else "  "), i == len(self.items) - 1)
+            component.print_me(os, prefix + ("| " if not is_last else "  "), i == len(self.items) - 1) # Печатаем компоненты
 
     def clone(self):
         return copy.deepcopy(self)
